@@ -1,0 +1,10 @@
+package com.example.itemslist.util
+
+import androidx.compose.ui.unit.dp
+
+object Dimens {
+
+    val MediumPadding = 16.dp
+    val SmallPadding = 6.dp
+
+}
