@@ -14,10 +14,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.itemslist.domain.model.Item
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.itemslist.presentation.components.ItemCard
 import com.example.itemslist.presentation.components.TopBar
+import com.example.itemslist.presentation.viewmodel.ItemsViewModel
 import com.example.itemslist.util.Dimens.SmallPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,12 +28,16 @@ import com.example.itemslist.util.Dimens.SmallPadding
 fun ItemListScreen(
     navigateToDetailsScreen: (itemId: Int) -> Unit,
     onBackCLick: () -> Unit,
-    items: List<Item>,
+    viewModel: ItemsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
+    val items by viewModel.getItems().collectAsState(
+        initial = emptyList()
+    )
+
     Surface(
         color = MaterialTheme.colorScheme.surface,
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
 
         Scaffold(

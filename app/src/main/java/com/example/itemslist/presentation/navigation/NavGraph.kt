@@ -25,8 +25,7 @@ fun NavGraph() {
                         route = "${Routes.ITEM_DETAIL_SCREEN}/${itemId}"
                     )
                 },
-                onBackCLick = { navController.navigateUp() },
-                items = emptyList()
+                onBackCLick = { navController.navigateUp() }
             )
         }
         composable(
