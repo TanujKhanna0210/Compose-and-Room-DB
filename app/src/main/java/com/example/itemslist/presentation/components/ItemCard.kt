@@ -18,19 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.itemslist.domain.model.Item
-import com.example.itemslist.ui.theme.ItemsListTheme
 import com.example.itemslist.util.Dimens.MediumPadding
 import com.example.itemslist.util.Dimens.SmallPadding
 
 @Composable
 fun ItemCard(
     item: Item,
-    navController: NavController
+    navigateToDetailsScreen: (itemId: Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -38,7 +34,7 @@ fun ItemCard(
             .wrapContentHeight()
             .padding(MediumPadding)
             .clickable {
-                navController.navigate("") //TODO: Handle navigation
+                navigateToDetailsScreen(item.itemId)
             },
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
@@ -88,21 +84,5 @@ fun ItemCard(
             }
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ItemCardPreview() {
-    ItemsListTheme {
-        ItemCard(
-            item = Item(
-                name = "Refrigerator",
-                qty = "4",
-                rating = "5",
-                remarks = "Excellent product.\nHighly recommended."
-            ),
-            navController = rememberNavController()
-        )
     }
 }

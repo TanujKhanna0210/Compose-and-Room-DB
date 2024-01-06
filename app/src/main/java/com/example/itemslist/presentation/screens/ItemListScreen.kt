@@ -1,6 +1,5 @@
 package com.example.itemslist.presentation.screens
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,19 +15,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.itemslist.domain.model.Item
 import com.example.itemslist.presentation.components.ItemCard
 import com.example.itemslist.presentation.components.TopBar
-import com.example.itemslist.ui.theme.ItemsListTheme
 import com.example.itemslist.util.Dimens.SmallPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemListScreen(
-    navController: NavController,
+    navigateToDetailsScreen: (itemId: Int) -> Unit,
+    onBackCLick: () -> Unit,
     items: List<Item>,
     modifier: Modifier = Modifier
 ) {
@@ -39,13 +35,13 @@ fun ItemListScreen(
 
         Scaffold(
             topBar = {
-                TopBar(title = "Item List",
-                    onBackClick = { navController.navigateUp() })
+                TopBar(
+                    title = "Item List",
+                    onBackClick = onBackCLick
+                )
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = { /* TODO: Handle navigation */
-                    navController.navigate("")
-                }) {
+                FloatingActionButton(onClick = { navigateToDetailsScreen(-1) }) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Add item"
@@ -63,67 +59,12 @@ fun ItemListScreen(
             ) {
                 items(count = items.size) { index ->
                     val item = items[index]
-                    ItemCard(item = item, navController = navController)
+                    ItemCard(item = item, navigateToDetailsScreen = {
+                        navigateToDetailsScreen(item.itemId)
+                    })
                 }
             }
         }
 
-    }
-}
-
-@Preview(showBackground = true)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun ItemListScreenPreview() {
-    ItemsListTheme {
-        ItemListScreen(
-            navController = rememberNavController(),
-            items =
-            listOf<Item>(
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                ),
-                Item(
-                    name = "Refrigerator",
-                    qty = "4",
-                    rating = "5",
-                    remarks = "Excellent product.\nHighly recommended."
-                )
-            )
-
-        )
     }
 }
