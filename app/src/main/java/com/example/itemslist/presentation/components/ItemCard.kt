@@ -1,5 +1,6 @@
 package com.example.itemslist.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.itemslist.domain.model.Item
 import com.example.itemslist.ui.theme.ItemsListTheme
 import com.example.itemslist.util.Dimens.MediumPadding
@@ -26,13 +29,17 @@ import com.example.itemslist.util.Dimens.SmallPadding
 
 @Composable
 fun ItemCard(
-    item: Item
+    item: Item,
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(MediumPadding),
+            .padding(MediumPadding)
+            .clickable {
+                navController.navigate("") //TODO: Handle navigation
+            },
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background,
@@ -94,7 +101,8 @@ fun ItemCardPreview() {
                 qty = "4",
                 rating = "5",
                 remarks = "Excellent product.\nHighly recommended."
-            )
+            ),
+            navController = rememberNavController()
         )
     }
 }
