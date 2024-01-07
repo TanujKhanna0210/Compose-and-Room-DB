@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.itemslist.domain.model.Item
 import kotlinx.coroutines.flow.Flow
 
@@ -17,8 +18,11 @@ interface ItemDao {
     @Query("SELECT * FROM item WHERE itemId=:itemId")
     suspend fun getItem(itemId: Int): Item
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(item: Item)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(item: Item)
+
+    @Update
+    suspend fun update(item: Item)
 
     @Delete
     suspend fun delete(item: Item)

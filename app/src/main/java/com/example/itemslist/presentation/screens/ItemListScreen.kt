@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.itemslist.presentation.components.ItemCard
 import com.example.itemslist.presentation.components.TopBar
 import com.example.itemslist.presentation.viewmodel.ItemsViewModel
+import com.example.itemslist.util.Constants.ITEM_LIST_SCREEN
 import com.example.itemslist.util.Dimens.SmallPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +44,7 @@ fun ItemListScreen(
         Scaffold(
             topBar = {
                 TopBar(
-                    title = "Item List",
+                    title = ITEM_LIST_SCREEN,
                     onBackClick = onBackCLick
                 )
             },

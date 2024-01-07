@@ -28,12 +28,37 @@ class ItemsViewModel @Inject constructor(
         item = repository.getItem(itemId)
     }
 
-    fun upsertItem(item: Item) = viewModelScope.launch {
-        repository.upsert(item)
+    fun insertItem(item: Item) = viewModelScope.launch {
+        repository.insert(item)
     }
 
-    fun deleteBook(item: Item) = viewModelScope.launch {
+    fun updateItem(item: Item) = viewModelScope.launch {
+        repository.update(item)
+    }
+
+    fun deleteItem(item: Item) = viewModelScope.launch {
         repository.delete(item)
+    }
+
+    fun updateName(name: String) {
+        item = item.copy(
+            name = name
+        )
+    }
+    fun updateQty(qty: String) {
+        item = item.copy(
+            qty = qty
+        )
+    }
+    fun updateRating(rating: String) {
+        item = item.copy(
+            rating = rating
+        )
+    }
+    fun updateRemarks(remarks: String) {
+        item = item.copy(
+            remarks = remarks
+        )
     }
 
 }

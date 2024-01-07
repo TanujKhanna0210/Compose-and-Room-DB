@@ -9,7 +9,9 @@ interface ItemRepository {
 
     suspend fun getItem(itemId: Int): Item
 
-    suspend fun upsert(item: Item)
+    suspend fun insert(item: Item)
+
+    suspend fun update(item: Item)
 
     suspend fun delete(item: Item)
 

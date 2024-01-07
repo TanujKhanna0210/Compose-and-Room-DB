@@ -16,8 +16,12 @@ class ItemRepositoryImpl(
         return itemDao.getItem(itemId)
     }
 
-    override suspend fun upsert(item: Item) {
-        itemDao.upsert(item)
+    override suspend fun insert(item: Item) {
+        itemDao.insert(item)
+    }
+
+    override suspend fun update(item: Item) {
+        itemDao.update(item)
     }
 
     override suspend fun delete(item: Item) {

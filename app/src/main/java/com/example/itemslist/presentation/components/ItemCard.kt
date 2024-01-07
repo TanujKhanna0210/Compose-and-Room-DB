@@ -55,12 +55,16 @@ fun ItemCard(
             ) {
                 Text(
                     text = "Item: ${item.name}",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
 
                 Text(
                     text = "Qty: ${item.qty}",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
 
@@ -68,10 +72,12 @@ fun ItemCard(
 
             Text(
                 text = "Ratings: ${item.rating}",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
 
-            if (item.remarks != null) {
+            if (item.remarks?.isNotEmpty() == true) {
 
                 Spacer(modifier = Modifier.height(SmallPadding))
 

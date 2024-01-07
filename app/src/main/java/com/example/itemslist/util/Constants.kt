@@ -6,4 +6,7 @@ object Constants {
 
     const val EMPTY_STRING = ""
 
+    const val ITEM_LIST_SCREEN = "Item List"
+    const val ITEM_DETAILS_SCREEN = "Item Details"
+
 }
