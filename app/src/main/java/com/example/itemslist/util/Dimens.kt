@@ -8,4 +8,6 @@ object Dimens {
     val SmallPadding = 6.dp
     val VerySmallPadding = 3.dp
 
+    val ImageSize = 200.dp
+
 }
