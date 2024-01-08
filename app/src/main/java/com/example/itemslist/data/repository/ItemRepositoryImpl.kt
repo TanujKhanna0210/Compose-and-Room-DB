@@ -1,6 +1,6 @@
 package com.example.itemslist.data.repository
 
-import com.example.itemslist.data.dao.ItemDao
+import com.example.itemslist.data.local.ItemDao
 import com.example.itemslist.domain.model.Item
 import com.example.itemslist.domain.repository.ItemRepository
 import kotlinx.coroutines.flow.Flow

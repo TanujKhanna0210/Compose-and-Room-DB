@@ -1,4 +1,4 @@
-package com.example.itemslist.data.dao
+package com.example.itemslist.data.local
 
 import androidx.room.Dao
 import androidx.room.Delete

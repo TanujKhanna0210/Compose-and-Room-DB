@@ -2,8 +2,9 @@ package com.example.itemslist.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.itemslist.data.dao.ItemDao
-import com.example.itemslist.data.db.ItemDb
+import com.example.itemslist.data.local.ItemDao
+import com.example.itemslist.data.local.ItemDb
+import com.example.itemslist.data.local.ItemTypeConverter
 import com.example.itemslist.data.repository.ItemRepositoryImpl
 import com.example.itemslist.domain.repository.ItemRepository
 import com.example.itemslist.util.Constants.ITEM_DATABASE_NAME
@@ -25,7 +26,9 @@ class AppModule {
         context = application,
         klass = ItemDb::class.java,
         name = ITEM_DATABASE_NAME
-    ).build()
+    )
+        .addTypeConverter(ItemTypeConverter())
+        .build()
 
     @Provides
     @Singleton

@@ -1,5 +1,6 @@
 package com.example.itemslist.domain.model
 
+import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,5 +10,6 @@ data class Item(
     val name: String,
     val qty: String,
     val rating: String,
-    val remarks: String?
+    val remarks: String?,
+    val images: List<Bitmap>
 )
