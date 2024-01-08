@@ -1,5 +1,6 @@
 package com.example.itemslist.presentation.viewmodel
 
+import android.graphics.Bitmap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -18,7 +19,7 @@ class ItemsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var item by mutableStateOf(
-        Item(-1, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING)
+        Item(-1, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, emptyList()) // TODO
     )
         private set
 
@@ -58,6 +59,12 @@ class ItemsViewModel @Inject constructor(
     fun updateRemarks(remarks: String) {
         item = item.copy(
             remarks = remarks
+        )
+    }
+
+    fun updateImages(images: List<Bitmap>) {
+        item = item.copy(
+            images = images
         )
     }
 

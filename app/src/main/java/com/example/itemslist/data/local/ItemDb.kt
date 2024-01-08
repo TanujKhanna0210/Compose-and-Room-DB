@@ -7,7 +7,7 @@ import com.example.itemslist.domain.model.Item
 
 @Database(
     entities = [Item::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(
     ItemTypeConverter::class

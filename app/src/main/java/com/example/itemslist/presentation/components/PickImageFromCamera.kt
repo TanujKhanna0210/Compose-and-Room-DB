@@ -30,10 +30,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,9 +44,7 @@ import com.example.itemslist.util.Dimens.SmallPadding
 import com.example.itemslist.util.Dimens.VerySmallPadding
 
 @Composable
-fun PickMultipleImagesFromCamera() {
-
-    val images = remember { mutableStateListOf<Bitmap>() }
+fun PickMultipleImagesFromCamera(images: SnapshotStateList<Bitmap>) {
 
     var selectedImage by remember { mutableStateOf<Bitmap?>(null) }
 

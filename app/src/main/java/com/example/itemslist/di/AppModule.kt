@@ -28,6 +28,7 @@ class AppModule {
         name = ITEM_DATABASE_NAME
     )
         .addTypeConverter(ItemTypeConverter())
+        .fallbackToDestructiveMigration()
         .build()
 
     @Provides

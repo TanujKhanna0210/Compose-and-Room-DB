@@ -55,6 +55,7 @@ fun EditItemComponent(
     val qty = viewModel.item.qty
     val rating = viewModel.item.rating
     val remarks = viewModel.item.remarks
+    val images = viewModel.item.images
 
     val context = LocalContext.current
 
@@ -79,6 +80,27 @@ fun EditItemComponent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start
         ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "Photos:",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(Dimens.SmallPadding))
+
+                // PickMultipleImagesFromCamera(images)
+
+            }
+
+            Spacer(modifier = Modifier.height(Dimens.MediumPadding))
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -258,7 +280,8 @@ fun EditItemComponent(
                             name = name,
                             qty = qty,
                             rating = rating,
-                            remarks = remarks
+                            remarks = remarks,
+                            images = images
                         )
                         viewModel.updateItem(item)
                         onBackClick()

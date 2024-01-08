@@ -1,5 +1,6 @@
 package com.example.itemslist.presentation.components
 
+import android.graphics.Bitmap
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -54,6 +56,8 @@ fun InsertItemComponent(
     var rating by remember { mutableStateOf(Constants.EMPTY_STRING) }
     var remarks by remember { mutableStateOf(Constants.EMPTY_STRING) }
 
+   val images = remember { mutableStateListOf<Bitmap>() }
+
     val context = LocalContext.current
 
     Scaffold(
@@ -77,6 +81,27 @@ fun InsertItemComponent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.Start
         ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "Photos:",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
+                )
+
+                Spacer(modifier = Modifier.height(Dimens.SmallPadding))
+
+                PickMultipleImagesFromCamera(images)
+
+            }
+
+            Spacer(modifier = Modifier.height(Dimens.MediumPadding))
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -256,7 +281,8 @@ fun InsertItemComponent(
                             name = name,
                             qty = qty,
                             rating = rating,
-                            remarks = remarks
+                            remarks = remarks,
+                            images = images
                         )
                         viewModel.insertItem(item)
                         onBackClick()
