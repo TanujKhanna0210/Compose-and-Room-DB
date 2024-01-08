@@ -9,5 +9,6 @@ object Dimens {
     val VerySmallPadding = 3.dp
 
     val ImageSize = 200.dp
+    val IconSize = 32.dp
 
 }

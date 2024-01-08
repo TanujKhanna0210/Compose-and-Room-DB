@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
@@ -27,6 +28,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,30 +46,27 @@ import com.example.itemslist.domain.model.Item
 import com.example.itemslist.presentation.viewmodel.ItemsViewModel
 import com.example.itemslist.util.Constants
 import com.example.itemslist.util.Dimens
+import com.example.itemslist.util.Dimens.IconSize
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 fun InsertItemComponent(
-    onBackClick: () -> Unit,
-    viewModel: ItemsViewModel
+    onBackClick: () -> Unit, viewModel: ItemsViewModel
 ) {
     var name by remember { mutableStateOf(Constants.EMPTY_STRING) }
     var qty by remember { mutableStateOf(Constants.EMPTY_STRING) }
-    var rating by remember { mutableStateOf(Constants.EMPTY_STRING) }
+    var rating by remember { mutableIntStateOf(0) }
     var remarks by remember { mutableStateOf(Constants.EMPTY_STRING) }
 
-   val images = remember { mutableStateListOf<Bitmap>() }
+    val images = remember { mutableStateListOf<Bitmap>() }
 
     val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            TopBar(
-                title = Constants.ITEM_DETAILS_SCREEN,
-                onBackClick = onBackClick
-            )
-        }
-    ) {
+    Scaffold(topBar = {
+        TopBar(
+            title = Constants.ITEM_DETAILS_SCREEN, onBackClick = onBackClick
+        )
+    }) {
         val topPadding = it.calculateTopPadding()
         Column(
             modifier = Modifier
@@ -78,13 +77,11 @@ fun InsertItemComponent(
                     end = Dimens.MediumPadding,
                     bottom = Dimens.MediumPadding
                 )
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.Start
+                .verticalScroll(rememberScrollState()), horizontalAlignment = Alignment.Start
         ) {
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
@@ -103,8 +100,7 @@ fun InsertItemComponent(
             Spacer(modifier = Modifier.height(Dimens.MediumPadding))
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -118,8 +114,7 @@ fun InsertItemComponent(
                 Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
 
                 val keyboardController = LocalSoftwareKeyboardController.current
-                OutlinedTextField(
-                    value = name,
+                OutlinedTextField(value = name,
                     onValueChange = {
                         if (it.length <= 15) {
                             name = it
@@ -127,8 +122,7 @@ fun InsertItemComponent(
                     },
                     placeholder = {
                         Text(
-                            text = "*required",
-                            style = MaterialTheme.typography.bodyMedium
+                            text = "*required", style = MaterialTheme.typography.bodyMedium
                         )
                     },
                     singleLine = true,
@@ -136,11 +130,9 @@ fun InsertItemComponent(
                     keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = ImeAction.Done
                     ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                        }
-                    )
+                    keyboardActions = KeyboardActions(onDone = {
+                        keyboardController?.hide()
+                    })
                 )
             }
 
@@ -148,8 +140,7 @@ fun InsertItemComponent(
             Spacer(modifier = Modifier.height(Dimens.MediumPadding))
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(.8f),
+                modifier = Modifier.fillMaxWidth(.8f),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -163,8 +154,7 @@ fun InsertItemComponent(
                 Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
 
                 val keyboardController = LocalSoftwareKeyboardController.current
-                OutlinedTextField(
-                    value = qty,
+                OutlinedTextField(value = qty,
                     onValueChange = {
                         if (it.length <= 4) {
                             qty = it
@@ -172,31 +162,26 @@ fun InsertItemComponent(
                     },
                     placeholder = {
                         Text(
-                            text = "*required",
-                            style = MaterialTheme.typography.bodyMedium
+                            text = "*required", style = MaterialTheme.typography.bodyMedium
                         )
                     },
                     singleLine = true,
                     textStyle = MaterialTheme.typography.bodyMedium,
                     keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done
+                        keyboardType = KeyboardType.Number, imeAction = ImeAction.Done
                     ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                        }
-                    )
+                    keyboardActions = KeyboardActions(onDone = {
+                        keyboardController?.hide()
+                    })
                 )
             }
 
             Spacer(modifier = Modifier.height(Dimens.MediumPadding))
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(.8f),
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Start
             ) {
                 Text(
                     text = "Ratings:",
@@ -207,39 +192,15 @@ fun InsertItemComponent(
 
                 Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
 
-                val keyboardController = LocalSoftwareKeyboardController.current
-                OutlinedTextField(
-                    value = rating,
-                    onValueChange = {
-                        if (it.length <= 1) {
-                            rating = it
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = "*required",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    },
-                    singleLine = true,
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                        }
-                    )
-                )
+                RatingBar(modifier = Modifier.size(IconSize), onRatingChange = { r ->
+                    rating = r
+                })
             }
 
             Spacer(modifier = Modifier.height(Dimens.MediumPadding))
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start
             ) {
@@ -263,8 +224,7 @@ fun InsertItemComponent(
                     },
                     placeholder = {
                         Text(
-                            text = "optional",
-                            style = MaterialTheme.typography.bodyMedium
+                            text = "optional", style = MaterialTheme.typography.bodyMedium
                         )
                     },
                     textStyle = MaterialTheme.typography.bodyMedium
@@ -275,12 +235,12 @@ fun InsertItemComponent(
 
             Button(
                 onClick = {
-                    if (name.isNotEmpty() && qty.isNotEmpty() && rating.isNotEmpty()) {
+                    if (name.isNotEmpty() && qty.isNotEmpty() && rating != 0) {
                         val item = Item(
                             itemId = Math.random().toInt(),
                             name = name,
                             qty = qty,
-                            rating = rating,
+                            rating = rating.toString(),
                             remarks = remarks,
                             images = images
                         )
@@ -288,13 +248,10 @@ fun InsertItemComponent(
                         onBackClick()
                     } else {
                         Toast.makeText(
-                            context,
-                            "Please enter the required fields!",
-                            Toast.LENGTH_SHORT
+                            context, "Please enter the required fields!", Toast.LENGTH_SHORT
                         ).show()
                     }
-                },
-                modifier = Modifier
+                }, modifier = Modifier
                     .fillMaxWidth()
                     .padding(Dimens.MediumPadding)
             ) {
@@ -303,8 +260,7 @@ fun InsertItemComponent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Done,
-                        contentDescription = null
+                        imageVector = Icons.Default.Done, contentDescription = null
                     )
                     Spacer(modifier = Modifier.width(Dimens.SmallPadding))
                     Text("Save")

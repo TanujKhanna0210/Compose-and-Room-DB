@@ -46,16 +46,19 @@ class ItemsViewModel @Inject constructor(
             name = name
         )
     }
+
     fun updateQty(qty: String) {
         item = item.copy(
             qty = qty
         )
     }
+
     fun updateRating(rating: String) {
         item = item.copy(
             rating = rating
         )
     }
+
     fun updateRemarks(remarks: String) {
         item = item.copy(
             remarks = remarks
@@ -67,5 +70,9 @@ class ItemsViewModel @Inject constructor(
             images = images
         )
     }
+
+//    fun fetchExistingImages(): List<Bitmap> {
+//        return item.images
+//    }
 
 }

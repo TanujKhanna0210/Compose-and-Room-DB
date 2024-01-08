@@ -95,7 +95,13 @@ fun EditItemComponent(
 
                 Spacer(modifier = Modifier.height(Dimens.SmallPadding))
 
-                // PickMultipleImagesFromCamera(images)
+//                val existingImages = viewModel.fetchExistingImages()
+//
+//                // Log.d("TAG_TAG", existingImages.size.toString())
+//
+//                viewModel.updateImages(images)
+//
+//                PickMultipleImagesFromCamera(images = remember { mutableStateListOf(*existingImages.toTypedArray()) })
 
             }
 
@@ -204,7 +210,14 @@ fun EditItemComponent(
                     modifier = Modifier.width(80.dp)
                 )
 
-                Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
+//                Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
+//
+//                RatingBar(
+//                    modifier = Modifier.size(Dimens.IconSize),
+//                    initialRating = rating,
+//                    onRatingChange = { r ->
+//                        viewModel.updateRating(r.toString())
+//                    })
 
                 val keyboardController = LocalSoftwareKeyboardController.current
                 OutlinedTextField(
@@ -281,7 +294,7 @@ fun EditItemComponent(
                             qty = qty,
                             rating = rating,
                             remarks = remarks,
-                            images = images
+                            images = emptyList()
                         )
                         viewModel.updateItem(item)
                         onBackClick()
