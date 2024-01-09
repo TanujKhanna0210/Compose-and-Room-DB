@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
@@ -26,6 +27,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -95,13 +98,7 @@ fun EditItemComponent(
 
                 Spacer(modifier = Modifier.height(Dimens.SmallPadding))
 
-//                val existingImages = viewModel.fetchExistingImages()
-//
-//                // Log.d("TAG_TAG", existingImages.size.toString())
-//
-//                viewModel.updateImages(images)
-//
-//                PickMultipleImagesFromCamera(images = remember { mutableStateListOf(*existingImages.toTypedArray()) })
+                PickMultipleImagesFromCamera(images = remember { mutableStateListOf(*(viewModel.item.images.toTypedArray())) })
 
             }
 
@@ -210,41 +207,14 @@ fun EditItemComponent(
                     modifier = Modifier.width(80.dp)
                 )
 
-//                Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
-//
-//                RatingBar(
-//                    modifier = Modifier.size(Dimens.IconSize),
-//                    initialRating = rating,
-//                    onRatingChange = { r ->
-//                        viewModel.updateRating(r.toString())
-//                    })
+                Spacer(modifier = Modifier.width(Dimens.VerySmallPadding))
 
-                val keyboardController = LocalSoftwareKeyboardController.current
-                OutlinedTextField(
-                    value = rating,
-                    onValueChange = {
-                        if (it.length <= 1) {
-                            viewModel.updateRating(it)
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = "*required",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    },
-                    singleLine = true,
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                        }
-                    )
-                )
+                RatingBar(
+                    modifier = Modifier.size(Dimens.IconSize),
+                    initialRating = if (rating == "") 0 else rating.toInt(),
+                    onRatingChange = { r ->
+                        viewModel.updateRating(r.toString())
+                    })
             }
 
             Spacer(modifier = Modifier.height(Dimens.MediumPadding))

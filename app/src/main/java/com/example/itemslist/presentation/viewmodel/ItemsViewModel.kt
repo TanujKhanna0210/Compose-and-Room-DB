@@ -19,7 +19,7 @@ class ItemsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var item by mutableStateOf(
-        Item(-1, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, emptyList()) // TODO
+        Item(-1, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, emptyList())
     )
         private set
 
@@ -70,9 +70,5 @@ class ItemsViewModel @Inject constructor(
             images = images
         )
     }
-
-//    fun fetchExistingImages(): List<Bitmap> {
-//        return item.images
-//    }
 
 }
