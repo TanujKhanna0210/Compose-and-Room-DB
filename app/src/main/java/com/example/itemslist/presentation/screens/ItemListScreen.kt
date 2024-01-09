@@ -67,9 +67,13 @@ fun ItemListScreen(
             ) {
                 items(count = items.size) { index ->
                     val item = items[index]
-                    ItemCard(item = item, navigateToDetailsScreen = {
-                        navigateToDetailsScreen(item.itemId)
-                    })
+                    ItemCard(item = item,
+                        navigateToDetailsScreen = {
+                            navigateToDetailsScreen(item.itemId)
+                        },
+                        onDelete = {
+                            viewModel.deleteItem(item)
+                        })
                 }
             }
         }
